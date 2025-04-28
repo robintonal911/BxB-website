@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="arena2">
+
+    <div class="b-nav">
+        <a href="index.html"><img class="favicon" src="images/blogo.png" alt=""></a>
+        <div class="title">
+		<h4 class="location">THE</h4>
+        <h4 class="location">ARENA</h4>
+    </div> 
+     <div>
+            <img class="help" src="images/questions.png" alt="help"></div>
+	</div>
+
+ 
+
+    <!-- INFORMATIONAL MENU -->
+
+
+<div class="extraInfo" id="infoMenu" >
+    <div class="infoHolder" id="close">
+        <div class="column1">
+            <div class="textbox">
+                <div class="containerCyan">
+                 <div class="cyan">
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                 </div>
+                </div>
+                <p class="textInfo">At Brique par Brique we love bringing together our community to discover and support new creators. We’re proud to partner with Rising From Our Roots, a BIPOC-led artist collective that organizes community-driven markets, allocating funds and resources to support underrepresented creators. 
+                </p>
+            </div>
+            <div class="continue" href="arena2.html">
+                <p>keep exploring</p>
+            </div>
+        </div>
+        <div class="column2">
+            <div class="container">
+        <div class="imagecontainer"> <img src="images/arena/root.png" alt=""> </div>
+        <div class="textbox"> <p class="textInfo2">image taken from for our roots' instagram page @risingfromourroots
+        </p></div>
+    </div>
+        </div>   
+    </div>
+    </div>
+
+
+
+
+
+<!-- CLICKABLE OBJECTS -->
+
+
+    <div class="elements">
+    
+        <div class="visitor"><img src="images/arena/visitor.png" alt="visitors"></div>
+
+
+        <div class="artmarket" id="trigger">
+            <img src="images/arena/artmarketG.png" class="artmarketG" alt="">
+            <img src="images/arena/artmarketF.png" class="artmarketF" alt="">
+        </div>
+
+        <div class="bluedoor" >
+            <img src="images/arena/bluedoorG.png" class="bluedoorG" alt="">
+            <img src="images/arena/bluedoorF.png" class="bluedoorF" alt="">
+        </div>
+
+        <a  id="buttonDoor" href="resource.html">  
+            <div class="arenadoor"><img class="arenadoorG"  src="images/arena/arenadoorG.png" alt=""> <img class="arenadoorF" src="images/arena/arenadoorF.png" alt="">
+            </div> </a>
+
+
+
+
+   
+</body>
+
+<script>
+    const trig = document.querySelector('#trigger');
+    const closer = document.querySelector('#close');
+
+    trig.addEventListener('click', openNav);
+    closer.addEventListener('click', closeNav);
+
+    function openNav() {
+        document.getElementById("infoMenu").style.width = "100vw";
+        document.getElementById("infoMenu").style.left = "0";
+    }
+
+    function closeNav() {
+        document.getElementById("infoMenu").style.width = "0%";
+        document.getElementById("infoMenu").style.left = "-30vw";
+    }
+</script>
+</html>
