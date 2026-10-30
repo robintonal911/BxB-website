@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="exch">
+
+    <div class="transition-banner" id="banner"></div>
+
+
+    <div class="b-nav">
+        <a href="index.html"><img class="favicon" src="images/blogo.png" alt=""></a>
+        <div class="title3">
+        <h4 class="location">EXCHANGE</h4>
+        <h4 class="location">HUB</h4>
+    </div> 
+     <div>
+            <img class="help" src="images/questions.png" alt="help"></div>
+	</div>
+    <p class="assistance"> During this visit, make sure your window size is set correctly. You can click on anything highlighted in yellow, and doors highlighted blue will take you to the next room. Pro tip: Try to befriend the cat! </p>
+
+ 
+
+    <div class="present" id="introExch">
+        <div class="presenter"><img src="images/exch/Amber2.png" id="character" alt=""></div>
+        <div id="dialogbox">The Exchange Hub will be our flexible and collaborative workspace, giving community organizations, artists, freelancers, and small teams the resources they need to work and connect. ↓| We will offer closed offices for long-term tenants, along with coworking and meeting spaces that can be booked as needed. Whether you're a part of a nonprofit, an artist collective, or an independent organizer, this space is for collaboration, and resource-sharing. </div> 
+    </div>
+
+
+<!-- INFORMATIONAL MENU -->
+
+<div class="extraInfo" id="infoMenu" >
+    <div class="infoHolder" id="close">
+        <div class="column1">
+            <div class="textbox">
+                <div class="containerCyan">
+                 <div class="cyan">
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                 </div>
+                </div>
+                <p class="textInfo">Here’s a prospective list of the organisations we at Brique par Brique are excited to continue working with at our new community centre! <br><br>
+                    Agir,
+                    Metonymy Press,
+                    DJTAL,
+                    Applied Archive,
+                    Arts in the Margins,
+                    Articule,
+                    CNCLT,
+                    Glass Half Full Podcast,
+                    Queer Sangha,
+                    Akiwacu,
+                    Parc-Exchange,
+                    Parc-Ex Curry,
+                    Parc-Ex Mutual Aid,
+                    CAPE Forum,
+                    L’Atelier Culture Vélo,
+                    and many more!
+                    </p>
+            </div>
+            <div class="continue">
+                <p>keep exploring  → </p>
+            </div>
+        </div>
+        <div class="column2">
+            <div class="container">
+        <div class="imagecontainer"> <img src="images/arena/bxb.gif" alt=""> </div>
+        <div class="textbox"> <p class="textInfo2">photos taken at a variety of BxB events</p></div>
+    </div>
+        </div>   
+    </div>
+    </div>
+
+
+
+    <div class="elements">
+        <a  id="buttonDoor" href="forum.html">  
+            <div class="exchdoor">
+                <img class="exchdoorG"  src="images/arena/arenadoorG.png" alt=""> 
+                <img class="exchdoorF" src="images/arena/arenadoorF.png" alt="">
+            </div> 
+        </a>
+
+        <div class="catto2">
+            <img class="cattoup" src="images/exch/catto.png" id="cattoG" alt="cat"> 
+            <img class="cattoground" src="images/exch/cattoground.png" id="cattoF" alt="cat">
+          </div> 
+
+
+
+         
+                 <div class="docu" id="trigger">
+                     <img src="images/exch/docuG.png" class="docuG" alt="">
+                     <img src="images/exch/docuF.png" class="docuF" alt="">
+                 </div>
+         
+    </div>
+
+
+</body>
+
+<script>
+
+
+
+// ---- BANNER ENTER ----
+
+
+
+
+const banner = document.getElementById("banner");
+
+// Page enter animation
+window.addEventListener("DOMContentLoaded", () => {
+  banner.classList.add("enter");
+});
+
+// Intercept link clicks
+document.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", e => {
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#")) return;
+
+    e.preventDefault();
+    banner.classList.add("exit"); // play exit animation
+
+    setTimeout(() => {
+      window.location.href = href;
+    }, 1000); // wait for animation
+  });
+});
+
+
+
+
+
+
+
+const trig = document.querySelector('#trigger');
+const closer = document.querySelector('#close');
+
+    trig.addEventListener('click', openNav);
+    closer.addEventListener('click', closeNav);
+
+    function openNav() {
+        document.getElementById("infoMenu").style.width = "100vw";
+        document.getElementById("infoMenu").style.left = "0";
+    }
+
+    function closeNav() {
+        document.getElementById("infoMenu").style.width = "0%";
+        document.getElementById("infoMenu").style.left = "-30vw";
+    }
+
+
+
+
+
+
+ // CODE FOR INTRO - taken from codepen and adapted for this, url: https://codepen.io/scythianwizard/pen/oNVrGoy
+
+
+        
+ const timer = 30; //The higher value, the more time it takes to load every letter. The smaller the value, the less time it takes.
+var messageStrings; //This array stores the message strings
+var dialogbox; //The DOM element
+var currMessage; //The current message being displayed/typed
+var messageId; //A counter to keep track of messages in the messageStrings array
+var applytitlestyle = true; //optional option to make the first and last slide appear different
+var loadingComplete = true; // Indicates if current message loading/typing is complete
+var skipNextPress = false; // To avoid immediate skipping to next slide after loading a message
+let isMessageSkipped = false; // Additional flag to track if the current message display was skipped
+
+//Create the arrow element
+var arrow = document.createElement("div");
+arrow.id = "arrow";
+
+//After the HTML page loads, this function gets executed
+document.addEventListener( "DOMContentLoaded", function(){
+	dialogbox = document.getElementById("dialogbox");
+	var messageString = dialogbox.innerHTML;
+	messageStrings = messageString.split('|'); //Split them by using the '|' character. You might want to change this logic.
+	dialogbox.innerHTML = "";//Empty the dialog box
+    messageId = 0;//Start with the very first message
+	currMessage = messageStrings[messageId];//Current message is the first message
+	nextMessage();//Just handles how the messageId changes
+	
+	document.getElementById("introExch").addEventListener("click", function() {//If the user has clicked/tapped
+    if (!loadingComplete) { // If currently loading/typing
+	//show the full message immediately and mark loading as complete
+        clearTimeouts();
+        dialogbox.innerHTML = currMessage; // Display the full message immediately
+        if (!dialogbox.contains(arrow)) {//Add the arrow
+            dialogbox.appendChild(arrow);
+        }
+        loadingComplete = true;//mark loading as complete
+    } else if (!skipNextPress) { // If loading was complete and skip was not due to a previous action...
+        nextMessage();//move to the next message
+    } else {//if it was due to a previous action
+        skipNextPress = false;// Reset skipNextPress
+    }
+});
+}, false);
+
+
+function titleStyle(){//css for the first and last slides
+	dialogbox.style.textAlign = "center";
+	dialogbox.style.fontSize = "4vh";
+	dialogbox.style.fontWeight = "500";
+	dialogbox.style.lineHeight = "1.5em";
+
+}
+function normalStyle(){//css for normal slides
+	dialogbox.style.textAlign = "center";
+	dialogbox.style.fontSize = "4vh";
+	dialogbox.style.fontWeight = "500";
+	dialogbox.style.lineHeight = "1.5em";
+}
+
+function nextMessage() {
+    if (!loadingComplete || skipNextPress) { 
+        skipNextPress = false; 
+        return; 
+    }
+
+    if (messageId >= messageStrings.length) {//we have reached the end
+
+        document.getElementById("introExch").style.opacity = "0";
+        document.getElementById("introExch").style.width = "0";
+        document.getElementById("introExch").style.left = "-100vw";
+        document.getElementById("character").style.left = "-40%";
+
+    }
+    currMessage = messageStrings[messageId];//Current message is whatever messageId we are on
+    messageId++;//Move to the next message Id
+	
+	if (applytitlestyle)//If we are using different style for first and last slides
+	{
+		if (messageId == 1 || messageId == messageStrings.length)
+		//If we are at the very first message (messageId == 1 implies current message is at index 0)
+		//Or if we have reached the last message
+			{
+				titleStyle();//Apply the titleStyle to the message
+			}
+		else{
+			normalStyle();//Apply normal style for messages in between
+		}
+	}
+    loadMessage(currMessage.split(''));//Send an array of letters for the loadmessage to type
+}
+
+function loadMessage(dialog) {//Start loading the message with the typewriter effect, 'dialog' here is an array of letters
+    loadingComplete = false; //Flag to show that we have started loading
+    dialogbox.innerHTML = ""; //Clear the previous message
+    for (let i = 0; i < dialog.length; i++) {//run through the array letter by letter
+        setTimeout(function() {//Start showing them with delay set in the timer variable
+            dialogbox.innerHTML += dialog[i];//append each letter one by one
+            if (i === dialog.length - 1) {//if we have reached the end
+                dialogbox.appendChild(arrow);//add the arrow
+                loadingComplete = true; // Loading complete
+            }
+        }, timer * i);//every i-th unit of timer will give one letter each iteration of the loop.
+    }
+}
+
+document.addEventListener('keydown', function(e) {//if a key was pressed
+    if ((e.key === 'Enter' || e.key === ' ') && !loadingComplete && !isMessageSkipped) {
+		//if the key pressed was enter or space, and loading is not complete, and the message is not just skipped yet...
+        clearTimeouts(); // Stop any ongoing animation
+        dialogbox.innerHTML = currMessage; // Display the full message immediately
+        if (!dialogbox.contains(arrow)) {//add the arrow
+            dialogbox.appendChild(arrow);
+        }
+        loadingComplete = true; // Mark loading as complete
+        isMessageSkipped = true; // Indicate that we've just skipped to the end of the message
+    }
+	//otherwise, if the loading was complete or the message was skipped
+	//do nothing while the key is still pressed (see next event listener)
+});
+
+document.addEventListener('keyup', function(e) {//a key was lifted
+    if ((e.key === 'Enter' || e.key === ' ') && loadingComplete) {
+		//if it is enter or space, and the message was loaded
+        if (!isMessageSkipped) {//we didn't skip the message
+            // Proceed to the next message only if we didn't just skip to the end of the current message
+            nextMessage();
+        }
+        isMessageSkipped = false; // Reset the flag after handling the keyup
+    }
+});
+
+
+function clearTimeouts() {
+    var highestTimeoutId = setTimeout(";"); // A hacky way to get the highest timeout id, just avoiding making it too complicated
+    for (var i = 0; i < highestTimeoutId; i++) {//run through each timeout
+        clearTimeout(i);//and clear it one by one
+    }
+}
+
+
+
+
+
+
+
+</script>
+</html>

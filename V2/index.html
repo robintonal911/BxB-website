@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    
+    <div id="logo">
+		<a href="https://www.briqueparbrique.com/"><img src="images/logo.png"></a>
+	</div>
+    <header>
+
+
+
+
+<!-- INFORMATIONAL MENU -->
+
+
+
+
+        <div class="transition-banner" id="banner"></div>
+
+
+    <h2 class="title">Brique par brique's new community center is on the horizon —</h2>
+    <h4>Scroll down to discover the possibilities!</h4>
+    <a ><img class="arrow" src="images/Arrow.png" alt="arrow"> </a>
+</header>
+    <a id="homeimg" href="commons.html"><img src="images/house.png" class="lander" alt="main home"></a>
+    <div id="jump"></div>
+</body>
+
+
+
+
+
+<!-- JAVASCRIPT -->
+
+
+
+
+<script>
+const banner = document.getElementById("banner");
+
+// Page enter animation
+window.addEventListener("DOMContentLoaded", () => {
+  banner.classList.add("enter");
+});
+
+// Scroll listener to trigger banner at bottom
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const windowHeight = window.innerHeight;
+  const docHeight = document.body.scrollHeight;
+
+  if (scrollTop + windowHeight >= docHeight - 5) {
+    if (!banner.classList.contains("exit")) {
+      banner.classList.add("exit");
+      setTimeout(() => {
+        window.location.href = "commons.html"; // next page
+      }, 1000);
+    }
+  }
+});
+
+// Faster continuous scroll (~4× speed)
+const arrow = document.querySelector(".arrow");
+arrow.addEventListener("click", e => {
+  e.preventDefault();
+
+  const start = window.scrollY;
+  const end = document.body.scrollHeight - window.innerHeight;
+  const duration = 0; // 4× faster than 2s
+  const startTime = performance.now();
+
+  function step(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1); // linear
+    const scrollPosition = start + (end - start) * progress;
+    window.scrollTo(0, scrollPosition);
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    }
+  }
+
+  requestAnimationFrame(step);
+});
+</script>
+</html>

@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="arena2">
+
+    <div class="b-nav">
+        <a href="index.html"><img class="favicon" src="images/blogo.png" alt=""></a>
+        <div class="title">
+		<h4 class="location">THE</h4>
+        <h4 class="location">ARENA</h4>
+    </div> 
+     <div>
+            <img class="help" src="images/questions.png" alt="help"></div>
+	</div>
+
+    <div class="transition-banner" id="banner"></div>
+    <p class="assistance"> During this visit, make sure your window size is set correctly. You can click on anything highlighted in yellow, and doors highlighted blue will take you to the next room. Pro tip: Try to befriend the cat! </p>
+
+
+    <!-- INFORMATIONAL MENU -->
+
+
+<div class="extraInfo" id="infoMenu" >
+    <div class="infoHolder" id="close">
+        <div class="column1">
+            <div class="textbox">
+                <div class="containerCyan">
+                 <div class="cyan">
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                 </div>
+                </div>
+                <p class="textInfo">At Brique par Brique we love bringing together our community to discover and support new creators. We’re proud to partner with Rising From Our Roots, a BIPOC-led artist collective that organizes community-driven markets, allocating funds and resources to support underrepresented creators. 
+                </p>
+            </div>
+            <div class="continue" href="arena2.html">
+                <p>keep exploring</p>
+            </div>
+        </div>
+        <div class="column2">
+            <div class="container">
+        <div class="imagecontainer"> <img src="images/arena/root.png" alt=""> </div>
+        <div class="textbox"> <p class="textInfo2">image taken from for our roots' instagram page @risingfromourroots
+        </p></div>
+    </div>
+        </div>   
+    </div>
+    </div>
+
+
+    <div class="extraInfo" id="infoMenu2" >
+        <div class="infoHolder" id="close2">
+            <div class="column1">
+                <div class="textbox">
+                    <div class="containerCyan">
+                     <div class="cyan">
+                        <div class="thing"></div>
+                        <div class="thing"></div>
+                        <div class="thing"></div>
+                     </div>
+                    </div>
+                    <p class="textInfo"> The Arena will also have dedicated workshop spaces where community groups can host a variety of classes. These flexible spaces will be able to support anything from meditation classes run by Queer Sangha to massage therapy sessions.
+                    </p>
+                </div>
+                <div class="continue" href="arena2.html">
+                    <p>keep exploring</p>
+                </div>
+            </div>
+            <div class="column2">
+                <div class="container">
+            <div class="imagecontainer"> <img src="images/arena/queersangha.png" alt=""> </div>
+            <div class="textbox"> <p class="textInfo2">image taken from queersangha's instagram page @queersangha
+            </p></div>
+        </div>
+            </div>   
+        </div>
+        </div>
+
+
+<!-- CLICKABLE OBJECTS -->
+
+
+    <div class="elements">
+    
+        <div class="visitor"><img src="images/arena/visitor.png" alt="visitors"></div>
+
+
+        <div class="artmarket" id="trigger">
+            <img src="images/arena/artmarketG.png" class="artmarketG" alt="">
+            <img src="images/arena/artmarketF.png" class="artmarketF" alt="">
+        </div>
+
+        <div class="bluedoor" id="trigger2">
+            <img src="images/arena/bluedoorG.png" class="bluedoorG" alt="">
+            <img src="images/arena/bluedoorF.png" class="bluedoorF" alt="">
+        </div>
+
+        <a  id="buttonDoor" href="resource.html">  
+            <div class="arenadoor"><img class="arenadoorG"  src="images/arena/arenadoorG.png" alt=""> <img class="arenadoorF" src="images/arena/arenadoorF.png" alt="">
+            </div> </a>
+
+
+
+
+   
+</body>
+
+
+
+
+
+
+
+
+<!-- JAVASCRIPT -->
+
+
+
+
+
+<script>
+
+
+
+// ---- BANNER ENTER ----
+
+
+
+
+const banner = document.getElementById("banner");
+
+// Page enter animation
+window.addEventListener("DOMContentLoaded", () => {
+  banner.classList.add("enter");
+});
+
+// Intercept link clicks
+document.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", e => {
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#")) return;
+
+    e.preventDefault();
+    banner.classList.add("exit"); // play exit animation
+
+    setTimeout(() => {
+      window.location.href = href;
+    }, 1000); // wait for animation
+  });
+});
+
+
+
+    const trig = document.querySelector('#trigger');
+    const closer = document.querySelector('#close');
+
+    trig.addEventListener('click', openNav);
+    closer.addEventListener('click', closeNav);
+
+    function openNav() {
+        document.getElementById("infoMenu").style.width = "100vw";
+        document.getElementById("infoMenu").style.left = "0";
+    }
+
+    function closeNav() {
+        document.getElementById("infoMenu").style.width = "0%";
+        document.getElementById("infoMenu").style.left = "-30vw";
+    }
+
+    const trig2 = document.querySelector('#trigger2');
+    const closer2 = document.querySelector('#close2');
+
+    trig2.addEventListener('click', openNav2);
+    closer2.addEventListener('click', closeNav2);
+
+    function openNav2() {
+        document.getElementById("infoMenu2").style.width = "100vw";
+        document.getElementById("infoMenu2").style.left = "0";
+    }
+
+    function closeNav2() {
+        document.getElementById("infoMenu2").style.width = "0%";
+        document.getElementById("infoMenu2").style.left = "-30vw";
+    }
+</script>
+</html>

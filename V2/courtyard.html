@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="courtyard">
+
+    <div class="b-nav">
+        <a href="index.html"><img class="favicon" src="images/blogo.png" alt=""></a>
+        <div class="title">
+        <h4 class="location">THE</h4>
+        <h4 class="location">COURTYARD</h4>
+    </div> 
+     <div>
+            <img class="help" src="images/questions.png" alt="help"></div>
+	</div>
+
+<div class="transition-banner" id="banner"></div>
+
+
+
+    <div class="present1" id="introCourtyard">
+        <div class="presenter"><img src="images/commons/Amber1.png" id="character" alt=""></div>
+        <div id="dialogbox">Thanks for visiting the community centre with us! We hope you enjoyed your tour so far. 
+             ↓| Last but not least, we have the Courtyard, our shared outdoor space where our community members 
+            will be able to come relax and enjoy one another’s company. Feel free to stick around and find out more, 
+            or go back through the Centre if you want to see anything again. 
+            |We hope to see you back again soon!
+            </div>
+</div>
+
+
+
+ 
+    <!-- INFORMATIONAL MENU -->
+
+
+<div class="extraInfo" id="infoMenu" >
+    <div class="infoHolder" id="close"> 
+        <div class="column1">
+            <div class="textbox">
+                <div class="containerCyan">
+                 <div class="cyan">
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                 </div>
+                </div>
+                <p class="textInfo">Atelier Culture Vélo is a community bike workshop. They offer affordable bike repair services, workshops, and educational programs aimed at making cycling accessible to everyone. We are excited to have an Atelier Culture Vélo bike-repair station at our upcoming community centre!</p>
+            </div>
+            <a class="continue" href="https://www.briqueparbrique.com/en/invest">
+                <p>finish the visit</p>
+            </a>
+        </div>
+        <div class="column2">
+            <div class="container">
+        <div class="imagecontainer"> <img src="images/courtyard/velo.png" alt=""> </div>
+        <div class="textbox"> <p class="textInfo2">They're currently located next to parc Jarry</p></div>
+    </div>
+        </div>   
+    </div>
+    </div>
+
+
+
+
+
+<!-- CLICKABLE OBJECTS -->
+
+
+    <div class="elements">
+        <img src="images/courtyard/bushes.png" class="bushes" alt="visitors">
+        <img src="images/exch/catto.png" class="catfinal" alt="cat">
+
+        <div class="bike" id="trigger">
+            <img src="images/courtyard/bikeG.png" class="bikeG" alt="">
+            <img src="images/courtyard/bikeF.png" class="bikeF" alt="">
+        </div>
+
+
+       <a  id="buttonDoor" href="https://www.briqueparbrique.com/en/invest">  
+        <div class="courtyarddoor"><img class="courtyarddoorG"  src="images/courtyard/doorG.png" alt=""> <img class="courtyarddoorF" src="images/courtyard/doorF.png" alt="">
+        </div> </a>
+
+
+
+
+   
+</body>
+
+<script>
+
+
+
+// ---- BANNER ENTER ----
+
+
+
+
+const banner = document.getElementById("banner");
+
+// Page enter animation
+window.addEventListener("DOMContentLoaded", () => {
+  banner.classList.add("enter");
+});
+
+// Intercept link clicks
+document.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", e => {
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#")) return;
+
+    e.preventDefault();
+    banner.classList.add("exit"); // play exit animation
+
+    setTimeout(() => {
+      window.location.href = href;
+    }, 1000); // wait for animation
+  });
+});
+
+
+
+
+
+
+    const trig = document.querySelector('#trigger');
+    const closer = document.querySelector('#close');
+
+    trig.addEventListener('click', openNav);
+    closer.addEventListener('click', closeNav);
+
+    function openNav() {
+        document.getElementById("infoMenu").style.width = "100vw";
+        document.getElementById("infoMenu").style.left = "0";
+    }
+
+    function closeNav() {
+        document.getElementById("infoMenu").style.width = "0%";
+        document.getElementById("infoMenu").style.left = "-30vw";
+    }
+
+ // CODE FOR INTRO - taken from codepen and adapted for this, url: https://codepen.io/scythianwizard/pen/oNVrGoy
+
+
+        
+ const timer = 30; //The higher value, the more time it takes to load every letter. The smaller the value, the less time it takes.
+var messageStrings; //This array stores the message strings
+var dialogbox; //The DOM element
+var currMessage; //The current message being displayed/typed
+var messageId; //A counter to keep track of messages in the messageStrings array
+var applytitlestyle = true; //optional option to make the first and last slide appear different
+var loadingComplete = true; // Indicates if current message loading/typing is complete
+var skipNextPress = false; // To avoid immediate skipping to next slide after loading a message
+let isMessageSkipped = false; // Additional flag to track if the current message display was skipped
+
+//Create the arrow element
+var arrow = document.createElement("div");
+arrow.id = "arrow";
+
+//After the HTML page loads, this function gets executed
+document.addEventListener( "DOMContentLoaded", function(){
+	dialogbox = document.getElementById("dialogbox");
+	var messageString = dialogbox.innerHTML;
+	messageStrings = messageString.split('|'); //Split them by using the '|' character. You might want to change this logic.
+	dialogbox.innerHTML = "";//Empty the dialog box
+    messageId = 0;//Start with the very first message
+	currMessage = messageStrings[messageId];//Current message is the first message
+	nextMessage();//Just handles how the messageId changes
+	
+	document.getElementById("introCourtyard").addEventListener("click", function() {//If the user has clicked/tapped
+    if (!loadingComplete) { // If currently loading/typing
+	//show the full message immediately and mark loading as complete
+        clearTimeouts();
+        dialogbox.innerHTML = currMessage; // Display the full message immediately
+        if (!dialogbox.contains(arrow)) {//Add the arrow
+            dialogbox.appendChild(arrow);
+        }
+        loadingComplete = true;//mark loading as complete
+    } else if (!skipNextPress) { // If loading was complete and skip was not due to a previous action...
+        nextMessage();//move to the next message
+    } else {//if it was due to a previous action
+        skipNextPress = false;// Reset skipNextPress
+    }
+});
+}, false);
+
+
+function titleStyle(){//css for the first and last slides
+	dialogbox.style.textAlign = "center";
+	dialogbox.style.fontSize = "4vh";
+	dialogbox.style.fontWeight = "500";
+	dialogbox.style.lineHeight = "1.5em";
+
+}
+function normalStyle(){//css for normal slides
+	dialogbox.style.textAlign = "center";
+	dialogbox.style.fontSize = "4vh";
+	dialogbox.style.fontWeight = "500";
+	dialogbox.style.lineHeight = "1.5em";
+}
+
+function nextMessage() {
+    if (!loadingComplete || skipNextPress) { 
+        skipNextPress = false; 
+        return; 
+    }
+
+    if (messageId >= messageStrings.length) {//we have reached the end
+
+        document.getElementById("introCourtyard").style.opacity = "0";
+        document.getElementById("introCourtyard").style.width = "0";
+        document.getElementById("introCourtyard").style.left = "-100vw";
+        document.getElementById("character").style.left = "-40%";
+    }
+    currMessage = messageStrings[messageId];//Current message is whatever messageId we are on
+    messageId++;//Move to the next message Id
+	
+	if (applytitlestyle)//If we are using different style for first and last slides
+	{
+		if (messageId == 1 || messageId == messageStrings.length)
+		//If we are at the very first message (messageId == 1 implies current message is at index 0)
+		//Or if we have reached the last message
+			{
+				titleStyle();//Apply the titleStyle to the message
+			}
+		else{
+			normalStyle();//Apply normal style for messages in between
+		}
+	}
+    loadMessage(currMessage.split(''));//Send an array of letters for the loadmessage to type
+}
+
+function loadMessage(dialog) {//Start loading the message with the typewriter effect, 'dialog' here is an array of letters
+    loadingComplete = false; //Flag to show that we have started loading
+    dialogbox.innerHTML = ""; //Clear the previous message
+    for (let i = 0; i < dialog.length; i++) {//run through the array letter by letter
+        setTimeout(function() {//Start showing them with delay set in the timer variable
+            dialogbox.innerHTML += dialog[i];//append each letter one by one
+            if (i === dialog.length - 1) {//if we have reached the end
+                dialogbox.appendChild(arrow);//add the arrow
+                loadingComplete = true; // Loading complete
+            }
+        }, timer * i);//every i-th unit of timer will give one letter each iteration of the loop.
+    }
+}
+
+document.addEventListener('keydown', function(e) {//if a key was pressed
+    if ((e.key === 'Enter' || e.key === ' ') && !loadingComplete && !isMessageSkipped) {
+		//if the key pressed was enter or space, and loading is not complete, and the message is not just skipped yet...
+        clearTimeouts(); // Stop any ongoing animation
+        dialogbox.innerHTML = currMessage; // Display the full message immediately
+        if (!dialogbox.contains(arrow)) {//add the arrow
+            dialogbox.appendChild(arrow);
+        }
+        loadingComplete = true; // Mark loading as complete
+        isMessageSkipped = true; // Indicate that we've just skipped to the end of the message
+    }
+	//otherwise, if the loading was complete or the message was skipped
+	//do nothing while the key is still pressed (see next event listener)
+});
+
+document.addEventListener('keyup', function(e) {//a key was lifted
+    if ((e.key === 'Enter' || e.key === ' ') && loadingComplete) {
+		//if it is enter or space, and the message was loaded
+        if (!isMessageSkipped) {//we didn't skip the message
+            // Proceed to the next message only if we didn't just skip to the end of the current message
+            nextMessage();
+        }
+        isMessageSkipped = false; // Reset the flag after handling the keyup
+    }
+});
+
+
+function clearTimeouts() {
+    var highestTimeoutId = setTimeout(";"); // A hacky way to get the highest timeout id, just avoiding making it too complicated
+    for (var i = 0; i < highestTimeoutId; i++) {//run through each timeout
+        clearTimeout(i);//and clear it one by one
+    }
+}
+
+
+ 
+
+</script>
+</html>
